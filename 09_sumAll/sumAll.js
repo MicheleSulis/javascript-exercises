@@ -1,10 +1,20 @@
 const sumAll = function (start, end) {
-    return [...Array(end + 1)].reduce((total, index) => {
-        return total + index;
-    }, start);
-};
+    if (!Number.isInteger(start) || !Number.isInteger(end) || start < 0 || end < 0)
+        return "ERROR";
 
-a = sumAll(10, 5);
+    if (start > end) {
+        let temp = start;
+        start = end;
+        end = temp;
+    }
+
+    end = end - start;
+    
+    return [...Array(end + 1).keys()].map((x) => x + start)
+        .reduce((total, index) => {
+            return total + index;
+        }, 0);
+};
 
 // Do not edit below this line
 module.exports = sumAll;
